@@ -16,7 +16,7 @@ set_elem l i el = (take i l) ++ [el] ++ tail (drop i l)
 swap_elem_if_not_in_list:: (Eq a) => [a] -> a -> Int -> [a] -> [(a, [a])]
 swap_elem_if_not_in_list l el i elems
     | i >= length l        = []
-    | el_i `in_list` elems = []
+    | el_i `in_list` elems = swap_elem_if_not_in_list l el (i+1) elems
     | otherwise = (el_i, (set_elem l i el)) : swap_elem_if_not_in_list l el (i+1) (el_i:elems)
     where
         el_i = head (drop i l)
